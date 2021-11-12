@@ -18,3 +18,15 @@ class PostLike(models.Model):
                 fields=["user", "post"], name="unique_post_like"
             )
         ]
+
+
+class UserFollow(models.Model):
+    user = models.ForeignKey(User, related_name="following", on_delete=models.CASCADE)
+    follow = models.ForeignKey(User, related_name="followers", on_delete=models.CASCADE)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=["user", "follow"], name="unique_user_follow"
+            )
+        ]
